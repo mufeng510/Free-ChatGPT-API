@@ -32,7 +32,7 @@ def run():
     token_keys = []
     for credential in credentials:
         # 接口有限流。
-        sleep_seconds = 10
+        sleep_seconds = 15
         print(f"开始休眠 {sleep_seconds} 秒...")
         time.sleep(sleep_seconds)
         print("休眠结束，继续执行后续代码。")
