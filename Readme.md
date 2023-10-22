@@ -85,7 +85,23 @@ pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 pool tohen设置一次后就不会再变了，以后添加修改账号密码只需要执行一次脚本就行了。
 
-## 定时执行(可选)
+## 在其他项目中使用 pool token
+
+### [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web)
+
+```
+OPENAI_API_KEY: 'pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+BASE_URL: 'https://ai.fakeopen.com'
+```
+
+### [gpt_academic](https://github.com/binary-husky/gpt_academic)
+
+```
+API_KEY: 'pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+CUSTOM_API_KEY_PATTERN : 'pk-[a-zA-Z0-9-]+$$'
+API_URL_REDIRECT : '{"https://api.openai.com/v1/chat/completions": "https://ai.fakeopen.com/v1/chat/completions"}'
+
+## 定时执行
 
 **windows:**
 
@@ -104,20 +120,4 @@ pool tohen设置一次后就不会再变了，以后添加修改账号密码只�
 4. 其他的设置看自己需求，添加好后可以运行一次试试有没有问题。
 
 ![测试](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/4.png)
-
-## 在其他项目中使用 pool token
-
-### [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web)
-
-```
-OPENAI_API_KEY: 'pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-BASE_URL: 'https://ai.fakeopen.com'
-```
-
-### [gpt_academic](https://github.com/binary-husky/gpt_academic)
-
-```
-API_KEY: 'pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-CUSTOM_API_KEY_PATTERN : 'pk-[a-zA-Z0-9-]+$$'
-API_URL_REDIRECT : '{"https://api.openai.com/v1/chat/completions": "https://ai.fakeopen.com/v1/chat/completions"}'
 ```
