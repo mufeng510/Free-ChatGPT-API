@@ -8,7 +8,9 @@
 
 ## 写在前面
 
-我们的目标是获得一个 `ChatGPT API Key`，通常是在使用`ChatGPT`的衍生项目时使用，比如[ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web)、[gpt_academic](https://github.com/binary-husky/gpt_academic)等。通过使用本项目的脚本，我们将获得一个 `pk-xxxxxxx` 格式的`api key`。
+我们的目标是获得一个 `ChatGPT API Key`，通常是在使用`ChatGPT`的衍生项目时使用，比如[ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web)、[gpt_academic](https://github.com/binary-husky/gpt_academic)等。这些项目需要我们提供一个 `API Key` 及其对应的 `BaseUrl`。
+
+通过使用本项目的脚本，我们将获得一个 `pk-xxxxxxx` 格式的`api key`。`BaseUrl`则为`https://ai.fakeopen.com`
 
 ### 大致流程
 
@@ -37,16 +39,24 @@
 
 ## 使用方法
 
-1. 安装python环境，我使用了`miniconda`，或直接下载[python](https://www.python.org/downloads/)安装并设置环境变量。
+1. 安装python环境
 
+方法一：下载[python](https://www.python.org/downloads/)安装并设置环境变量。
+
+方法二：使用`miniconda`。
+
+- 在终端中执行：
 ```
-# 使用scoop安装miniconda3
+# 使用scoop安装miniconda3 (没有scoop请手动安装miniconda)
 scoop install miniconda3
 # 创建pandora专用的环境
 conda create -n pool python=3.10
 conda init pool
 conda activate pool
 ```
+
+-  打开`run_job.bat`，在`python auto_pool_token.py`之前添加`call conda activate pool`
+![conda](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/5.png)
 
 2. 安装依赖
 
@@ -67,25 +77,47 @@ xxx@outlook.com,xxxxxx
 pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-5. 打开`auto_pool_token.py`，修改以下内容
-
-```
-# 你的魔法地址
-proxy = 'http://127.0.0.1:10809'
-
-# 唯一的名字，用于注册或更新 Share Token，相同 unique_name 和 access_token 始终生成相同的 Share Token
-
-unique_name = 'mufeng'
-```
-
 6. 运行脚本
 
 **windows:**
 
-执行`run_job.bat`, **如果不使用`miniconda`，请删除脚本中的 `call conda activate pool`**
+执行`run_job.bat`, pool tohen最后会保存到`pool_token.txt`。
 
-7. 定时执行(可选)
+pool tohen设置一次后就不会再变了，以后添加修改账号密码只需要执行一次脚本就行了。
+
+## 定时执行(可选)
 
 **windows:**
 
-使用`任务计划程序`， 创建任务， 根据你的需求添加即可。操作选择执行脚本：`run_job.bat`
+1. 打开`任务计划程序`， 创建任务。
+
+![创建计划任务](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/1.png)
+
+2. 设置触发器，根据你的需求添加即可。
+
+![设置触发器](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/2.png)
+
+3. 操作选择执行脚本：`run_job.bat`。
+
+![操作](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/3.png)
+
+4. 其他的设置看自己需求，添加好后可以运行一次试试有没有问题。
+
+![测试](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/4.png)
+
+## 在其他项目中使用 pool token
+
+### [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web)
+
+```
+OPENAI_API_KEY: 'pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+BASE_URL: 'https://ai.fakeopen.com'
+```
+
+### [gpt_academic](https://github.com/binary-husky/gpt_academic)
+
+```
+API_KEY: 'pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+CUSTOM_API_KEY_PATTERN : 'pk-[a-zA-Z0-9-]+$$'
+API_URL_REDIRECT : '{"https://api.openai.com/v1/chat/completions": "https://ai.fakeopen.com/v1/chat/completions"}'
+```
