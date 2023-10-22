@@ -100,6 +100,7 @@ BASE_URL: 'https://ai.fakeopen.com'
 API_KEY: 'pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 CUSTOM_API_KEY_PATTERN : 'pk-[a-zA-Z0-9-]+$$'
 API_URL_REDIRECT : '{"https://api.openai.com/v1/chat/completions": "https://ai.fakeopen.com/v1/chat/completions"}'
+```
 
 ## 定时执行
 
@@ -120,4 +121,3 @@ API_URL_REDIRECT : '{"https://api.openai.com/v1/chat/completions": "https://ai.f
 4. 其他的设置看自己需求，添加好后可以运行一次试试有没有问题。
 
 ![测试](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/4.png)
-```
