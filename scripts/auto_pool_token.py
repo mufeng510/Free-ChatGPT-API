@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 
 
-from os import path
-
 import requests
-
-from pandora.openai.auth import Auth0
-
+import random
+import string
 import time
-
 import re
+from os import path
+from pandora.openai.auth import Auth0
 
 
 def run():
-    proxy = 'http://127.0.0.1:10809'
-    unique_name = 'mufeng'
+    unique_name = generate_random_string(10)
 
     expires_in = 0
     current_dir = path.dirname(path.abspath(__file__))
@@ -51,7 +48,7 @@ def run():
         token_keys.append(token_info)
 
         try:
-            token_info['token'] = Auth0(username, password, proxy).auth(False)
+            token_info['token'] = Auth0(username, password).auth(False)
             print('Login success: {}, {}'.format(username, progress))
         except Exception as e:
             err_str = str(e).replace('\n', '').replace('\r', '').strip()
@@ -116,6 +113,11 @@ def run():
                 print('pool token 更新失败')
         f.close()
 
+
+def generate_random_string(length):
+    letters = string.ascii_letters
+    random_string = ''.join(random.choice(letters) for _ in range(length))
+    return random_string
 
 if __name__ == '__main__':
     run()
