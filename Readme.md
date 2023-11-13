@@ -2,7 +2,7 @@
 
 ## 说明
 
-感谢[pandora](https://github.com/zhile-io/pandora)项目，这一次真正实现了ChatGPT自由。本项目主要实现了根据账号密码自动获取accessToken并更新至pool-token。初始脚本来源于旧的pandora，该库被删除，无法添加链接，这个脚本是我进行修改过后的，使用更方便。本人也是小白一枚，欢迎大家一起补充完善。
+感谢[pandora](https://github.com/pandora-next)项目，这一次真正实现了ChatGPT自由。本项目主要实现了根据账号密码自动获取accessToken并更新至pool-token。初始脚本来源于旧的pandora，该库被删除，无法添加链接，这个脚本是我进行修改过后的，使用更方便。本人也是小白一枚，欢迎大家一起补充完善。
 
 **如果对您有帮助，请给一个免费的star，谢谢！**
 

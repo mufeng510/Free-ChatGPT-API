@@ -97,7 +97,7 @@ def run():
     with open(pool_token_file, 'w', encoding='utf-8') as f:
         if len(filtered_tokens)==0:
             # 如果没有可用账号，则使用公共pool。
-            print('可用账号，请检查后重试')
+            print('无可用账号，请检查后重试')
         else:
             data = {
                 'share_tokens': '\n'.join(filtered_tokens),
