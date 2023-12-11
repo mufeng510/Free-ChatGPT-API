@@ -4,6 +4,8 @@
 
 感谢[pandora](https://github.com/pandora-next)项目，这一次真正实现了ChatGPT自由。本项目主要实现了根据账号密码自动获取accessToken并更新至pool-token。初始脚本来源于旧的pandora，该库被删除，无法添加链接，这个脚本是我进行修改过后的，使用更方便。本人也是小白一枚，欢迎大家一起补充完善。
 
+2023/12/11 重写了脚本，不再需要Python环境，基于PandoraNext 0.5.0
+
 **如果对您有帮助，请给一个免费的star，谢谢！**
 
 ## 写在前面
@@ -24,7 +26,7 @@
 
 `Share Token` 和 `Pool Token` 均是由 pandora 作者提供的服务，与官方无关。`Share Token`可以实现多人共享一个账号，可以进行会话隔离，不会扣除额度，实现了ChatGPT自由。但是`Share Token`依旧存在 `1` 个会话的限制，所以作者提供了 `Pool Token`，使用由最多 `100` 个`Share Token`组合的 `Pool Token` 时会自动轮转，实现了多人同时会话。
 
-更多信息可以查看[pandora文档](https://github.com/zhile-io/pandora/blob/master/doc/fakeopen.md)
+更多信息可以查看[pandora文档](https://fakeopen.org/PandoraNext/)
 
 ### 文件说明
 
@@ -48,13 +50,13 @@
 {
     "bind": "0.0.0.0:8181",
     "license_id": "xxxxxxxxxxx",
-    "proxy_api_prefix": "hahaha-prefix",
+    "proxy_api_prefix": "qqrr123123",
 }
 ```
 
 我们在使用 `api key` 时需要将反代url设置为`http(s)://<bind>/<proxy_api_prefix>`
 
-如: `http://127.0.0.1:8181/hahaha-prefix`
+如: `http://127.0.0.1:8181/qqrr123123`
 
 ### 自动更新pool token脚本
 
@@ -77,7 +79,7 @@ pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 pool tohen设置一次后就不会再变了，以后添加修改账号密码只需要执行一次脚本就行了。
 
-5. 执行`run_job` 即可，pool tohen最后会保存到`pool_token.txt`。
+5. windows执行`run_job.bat` 即可，linux 执行`bash update_pool_token.sh`，如果缺少权限先执行`chmod +x update_pool_token.sh`。 pool tohen最后会保存到`pool_token.txt`。
 
 <details> <summary>python额外要做的（在上述步骤之前）</summary>
 
@@ -131,6 +133,10 @@ API_URL_REDIRECT : '{"https://api.openai.com/v1/chat/completions": "http(s)://<b
 运行`add_auto_run_job.bat`,默认每周二执行，想修改可以发给GPT说明你的需求进行改，添加好后可以运行一次试试有没有问题。
 
 ![测试](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/4.png)
+
+**linux:**
+
+执行`bash add_auto_run_job.sh`，每隔7天执行一次，需要删除可执行 `bash delete_auto_run_job.sh`。可在 `crontab -e` 查看
 
 ### 共享站
 
