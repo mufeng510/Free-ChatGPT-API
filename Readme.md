@@ -8,9 +8,9 @@
 
 ## 写在前面
 
-我们的目标是获得一个 `ChatGPT API Key`，通常是在使用`ChatGPT`的衍生项目时使用，比如[ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web)、[gpt_academic](https://github.com/binary-husky/gpt_academic)等。这些项目需要我们提供一个 `API Key` 及其对应的 `BaseUrl`。
+我们的目标是获得一个 `ChatGPT API Key`，通常是在使用`ChatGPT`的衍生项目时使用，比如[ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web)、[gpt_academic](https://github.com/binary-husky/gpt_academic)等。这些项目需要我们提供一个 `API Key` 及其对应的 `APIUrl`。
 
-通过使用本项目的脚本，我们将获得一个 `pk-xxxxxxx` 格式的`api key`。`BaseUrl`则为`https://ai.fakeopen.com`
+通过使用本项目的脚本，我们将获得一个 `pk-xxxxxxx` 格式的`api key`。`APIUrl`则为你部署的`PandoraNext`地址
 
 ### 大致流程
 
@@ -24,45 +24,43 @@
 
 `Share Token` 和 `Pool Token` 均是由 pandora 作者提供的服务，与官方无关。`Share Token`可以实现多人共享一个账号，可以进行会话隔离，不会扣除额度，实现了ChatGPT自由。但是`Share Token`依旧存在 `1` 个会话的限制，所以作者提供了 `Pool Token`，使用由最多 `100` 个`Share Token`组合的 `Pool Token` 时会自动轮转，实现了多人同时会话。
 
-**因此，我们在使用 `api key` 时需要将反代url设置为`https://ai.fakeopen.com`**
-
 更多信息可以查看[pandora文档](https://github.com/zhile-io/pandora/blob/master/doc/fakeopen.md)
 
 ### 文件说明
 
+`demo`目录下存放了各环境的示例，本项目是通过`scripts`下的文件实现功能的。
+
 - `run_job.bat` windows执行脚本的批处理脚本
-- `auto_pool_token.py` 实现功能的脚本。
+- `add_auto_run_job.bat` 添加定时任务的批处理脚本
+- `update_pool_token.*` 实现功能的脚本。
 - `credentials.txt` 存储账号、密码
-- `tokens.txt` 存储 `Access Token`
-- `share_tokens.txt` 存储 `Share Token`
 - `pool_token.txt` 存储 `Pool Token`
 
 ## 使用方法
 
-1. 安装python环境
+## 部署PandoraNext
 
-方法一：下载[python](https://www.python.org/downloads/)安装并设置环境变量。
+首先你需要参考[PandoraNext文档](https://fakeopen.org/PandoraNext/)进行部署，本项目的脚本无需与PandoraNext在同一位置。如果你怕出问题，就按照demo一样，将本项目的`scripts`文件夹放在`PandoraNext`目录下。
 
-方法二：使用`miniconda`。
-
-- 在终端中执行：
+**部署PandoraNext时，你至少应配置`config.json`中的 `bind`,`license_id`、`proxy_api_prefix`**
 ```
-# 使用scoop安装miniconda3 (没有scoop请手动安装miniconda)
-scoop install miniconda3
-# 创建pandora专用的环境
-conda create -n pool python=3.10
-conda init pool
-conda activate pool
+示例
+{
+    "bind": "0.0.0.0:8181",
+    "license_id": "xxxxxxxxxxx",
+    "proxy_api_prefix": "hahaha-prefix",
+}
 ```
 
--  打开`run_job.bat`，在`python auto_pool_token.py`之前添加`call conda activate pool`
-![conda](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/5.png)
+我们在使用 `api key` 时需要将反代url设置为`http(s)://<bind>/<proxy_api_prefix>`
 
-2. 安装依赖
+如: `http://8.3.2.1:8181/hahaha-prefix`
 
-```
-pip install pandora-chatgpt
-```
+### 自动更新pool token脚本
+
+1. 下载[scripts](https://github.com/mufeng510/Free-ChatGPT-API/tree/master/demo/)到你本地
+
+2. 打开`update_pool_token`文件，修改`$api_url`为`http(s)://<bind>/<proxy_api_prefix>`。
 
 3. 新建`credentials.txt`并设置内容为账号密码，一行一个，账号密码用逗号分隔
 
@@ -77,13 +75,37 @@ xxx@outlook.com,xxxxxx
 pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-6. 运行脚本
-
-**windows:**
-
-执行`run_job.bat`, pool tohen最后会保存到`pool_token.txt`。
-
 pool tohen设置一次后就不会再变了，以后添加修改账号密码只需要执行一次脚本就行了。
+
+5. 执行`run_job` 即可，pool tohen最后会保存到`pool_token.txt`。
+
+<details> <summary>python额外要做的（在上述步骤之前）</summary>
+
+1. 安装python环境
+
+方法一：下载[python](https://www.python.org/downloads/)安装并设置环境变量。
+
+方法二：使用`miniconda`。
+
+- 在终端中执行：
+```
+# 使用scoop安装miniconda3 (没有scoop请手动安装miniconda)
+scoop install miniconda3
+# 创建pandora专用的环境
+conda create -n pool python=3.10
+conda init bash
+conda activate pool
+```
+
+-  打开`run_job.bat`，在`python update_pool_token.py`之前添加`call conda activate pool`
+![conda](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/5.png)
+
+2. 安装依赖
+
+```
+pip install pandora-chatgpt
+```
+</details>
 
 ## 在其他项目中使用 pool token
 
@@ -106,18 +128,6 @@ API_URL_REDIRECT : '{"https://api.openai.com/v1/chat/completions": "https://ai.f
 
 **windows:**
 
-1. 打开`任务计划程序`， 创建任务。
-
-![创建计划任务](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/1.png)
-
-2. 设置触发器，根据你的需求添加即可。
-
-![设置触发器](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/2.png)
-
-3. 操作选择执行脚本：`run_job.bat`。
-
-![操作](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/3.png)
-
-4. 其他的设置看自己需求，添加好后可以运行一次试试有没有问题。
+运行`add_auto_run_job.bat`,默认每周二执行，想修改可以发给GPT说明你的需求进行改，添加好后可以运行一次试试有没有问题。
 
 ![测试](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/4.png)
