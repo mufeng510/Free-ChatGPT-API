@@ -54,7 +54,7 @@
 
 我们在使用 `api key` 时需要将反代url设置为`http(s)://<bind>/<proxy_api_prefix>`
 
-如: `http://8.3.2.1:8181/hahaha-prefix`
+如: `http://127.0.0.1:8181/hahaha-prefix`
 
 ### 自动更新pool token脚本
 
@@ -131,3 +131,13 @@ API_URL_REDIRECT : '{"https://api.openai.com/v1/chat/completions": "https://ai.f
 运行`add_auto_run_job.bat`,默认每周二执行，想修改可以发给GPT说明你的需求进行改，添加好后可以运行一次试试有没有问题。
 
 ![测试](https://github.com/mufeng510/Free-ChatGPT-API/raw/master/images/4.png)
+
+### 共享站
+
+PandoraNext提供了一个功能等同[chat-shared3.zhile.io](https://chat-shared3.zhile.io/)的共享站，如果你需要保存`access_token`以供共享站使用，需要做以下修改
+
+1. 将本项目脚本放置`PandoraNext`的子目录下，如本项目demo一样
+
+2. 打开`update_pool_token`文件，取消 `Run` 方法中的 `Save-Tokens` 的注释
+
+3. 运行脚本
