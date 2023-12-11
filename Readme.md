@@ -113,7 +113,7 @@ pip install pandora-chatgpt
 
 ```
 OPENAI_API_KEY: 'pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-BASE_URL: 'https://ai.fakeopen.com'
+BASE_URL: 'http(s)://<bind>/<proxy_api_prefix>'
 ```
 
 ### [gpt_academic](https://github.com/binary-husky/gpt_academic)
@@ -121,7 +121,7 @@ BASE_URL: 'https://ai.fakeopen.com'
 ```
 API_KEY: 'pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 CUSTOM_API_KEY_PATTERN : 'pk-[a-zA-Z0-9-]+$$'
-API_URL_REDIRECT : '{"https://api.openai.com/v1/chat/completions": "https://ai.fakeopen.com/v1/chat/completions"}'
+API_URL_REDIRECT : '{"https://api.openai.com/v1/chat/completions": "http(s)://<bind>/<proxy_api_prefix>/v1/chat/completions"}'
 ```
 
 ## 定时执行
