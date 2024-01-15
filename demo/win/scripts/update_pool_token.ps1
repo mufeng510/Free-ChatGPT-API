@@ -51,7 +51,7 @@ function Read-Credentials {
     for ($i = 0; $i -lt $credentials.Length; $i += 2) {
         $credentialPairs += ,@($credentials[$i], $credentials[$i + 1])
     }
-    return $credentialPairs
+    return ,$credentialPairs
 }
 
 

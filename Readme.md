@@ -81,7 +81,15 @@ pk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 pool tohen设置一次后就不会再变了，以后添加修改账号密码只需要执行一次脚本就行了。
 
-5. windows执行`run_job.bat` 即可，linux 执行`bash update_pool_token.sh`，如果缺少权限先执行`chmod +x update_pool_token.sh`。 pool tohen最后会保存到`pool_token.txt`。
+5. windows执行`run_job.bat` 即可，linux 执行`bash update_pool_token.sh`，
+
+如果缺少权限先执行
+
+win: `Set-ExecutionPolicy RemoteSigned`
+
+linux: `chmod +x update_pool_token.sh`。 
+
+pool tohen最后会保存到`pool_token.txt`。
 
 <details> <summary>python额外要做的（在上述步骤之前）</summary>
 
